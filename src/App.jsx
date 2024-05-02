@@ -1,43 +1,57 @@
-import { Outlet } from "react-router-dom";
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Header from "./components/Header";
-import Navbar from "./components/Navbar";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Main from './layouts/Main';
+import NotFound from "./pages/NotFound";
 
-function App() {
+import publicRoutes from "./routes/PublicRoutes";
+import protectedRoutes from "./routes/ProtectedRoutes";
 
+// import css
+import "./assets/css/remixicon.css";
+
+// import scss
+import "./scss/style.scss";
+
+
+// set skin on load
+window.addEventListener("load", function () {
+  let skinMode = localStorage.getItem("skin-mode");
+  let HTMLTag = document.querySelector("html");
+
+  if (skinMode) {
+    HTMLTag.setAttribute("data-skin", skinMode);
+  }
+});
+
+export default function App() {
   return (
-
-    <div className="App">
-      <Header />
-      <Navbar />
-      <Outlet />
-    </div>
-    // <>
-    //   <div>
-    //     <a href="https://vitejs.dev" target="_blank">
-    //       <img src={viteLogo} className="logo" alt="Vite logo" />
-    //     </a>
-    //     <a href="https://react.dev" target="_blank">
-    //       <img src={reactLogo} className="logo react" alt="React logo" />
-    //     </a>
-    //   </div>
-    //   <h1>Vite + React</h1>
-    //   <div className="card">
-    //     <button onClick={() => setCount((count) => count + 1)}>
-    //       count is {count}
-    //     </button>
-    //     <p>
-    //       Edit <code>src/App.jsx</code> and save to test HMR
-    //     </p>
-    //   </div>
-    //   <p className="read-the-docs">
-    //     Click on the Vite and React logos to learn more
-    //   </p>
-    // </>
-  )
+    <React.Fragment>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Main />}>
+            {protectedRoutes.map((route, index) => {
+              return (
+                <Route
+                  path={route.path}
+                  element={route.element}
+                  key={index}
+                />
+              )
+            })}
+          </Route>
+          {publicRoutes.map((route, index) => {
+            return (
+              <Route
+                path={route.path}
+                element={route.element}
+                key={index}
+              />
+            )
+          })}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </React.Fragment>
+    
+  );
 }
-
-export default App

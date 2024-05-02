@@ -1,79 +1,17 @@
-// import React from 'react'
-// import ReactDOM from 'react-dom/client'
-// import App from './App.jsx'
-// import './index.css'
-
-// ReactDOM.createRoot(document.getElementById('root')).render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-// )
-
-import ReactDOM from 'react-dom/client';
 import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import './index.css';
-//import auth from './utils/auth';
+import ReactDOM from 'react-dom/client';
+//import reportWebVitals from './reportWebVitals';
+import App from './App';
 
-import App from './App.jsx';
-import Homepage from './pages/Homepage.jsx';
-import NewAssignment from './pages/NewAssignment.jsx';
-import Search from './pages/Search.jsx';
-import Inbox from './pages/Inbox.jsx';
-import Login from './pages/Login';
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+    <div className="main-backdrop"></div>
+  </React.StrictMode>
+);
 
-
-// if (auth.loggedIn()) {
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <App />,
-      errorElement: <Error />,
-      children: [
-        {
-          index: true,
-          element: <Homepage />,
-        }, {
-          path: '/login',
-          element: <Login />
-        }, {
-          path: '/newassignment',
-          element: <NewAssignment />
-        }, {
-          path: '/search',
-          element: <Search />
-        }, {
-          path: '/inbox',
-          element: <Inbox />
-        }
-      ],
-    },
-  ]);
-  ReactDOM.createRoot(document.getElementById('root')).render(
-    <RouterProvider router={router} />
-  );
-// // } else {
-// //   const router = createBrowserRouter([
-// //     {
-// //       path: '/',
-// //       element: <App />,
-// //       errorElement: <Error />,
-// //       children: [
-// //         {
-// //           index: true,
-// //           element: <Homepage />,
-// //         }, {
-// //           path: '/login',
-// //           element: <Login />
-// //         },{
-// //           path: '*',
-// //           element: <Login />
-// //         }
-// //       ],
-// //     },
-// //   ]);
-//   ReactDOM.createRoot(document.getElementById('root')).render(
-//     <RouterProvider router={router} />
-//   );
-// }
-
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+//reportWebVitals();
